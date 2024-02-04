@@ -12,19 +12,19 @@ add_executable(
 target_include_directories(
 	${PROJECT_NAME}
 	PRIVATE
-	./include/
-	./include/${PROJECT_NAME}
+		./include/
+		./include/${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME}
 	PRIVATE
-	raylib
-	opengl32
-	gdi32
-	winmm
+		raylib
+		opengl32
+		gdi32
+		winmm
 )
 
 target_compile_definitions(${PROJECT_NAME}
 	PRIVATE
-	RESOURCES_DIR="${CMAKE_CURRENT_SOURCE_DIR}/resources"
+		RESOURCES_DIR="${CMAKE_CURRENT_SOURCE_DIR}/resources"
 )
