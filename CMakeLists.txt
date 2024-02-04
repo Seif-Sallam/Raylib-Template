@@ -9,9 +9,9 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(CPM)
 
 CPMAddPackage(
-    NAME raylib
-    GIT_REPOSITORY git@github.com:raysan5/raylib.git
-    GIT_TAG 5.0
+	NAME raylib
+	GIT_REPOSITORY git@github.com:raysan5/raylib.git
+	GIT_TAG 5.0
 )
 
 set(PROJECT_NAME Template)
