@@ -44,12 +44,28 @@ void CustomLog(int msgType, const char *text, va_list args)
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
+
+inline constexpr unsigned char operator "" _u8( unsigned long long arg ) noexcept
+{
+    return static_cast< unsigned char >( arg );
+}
+
+Color invertColor(Color c)
+{
+    Color c2{};
+    c2.r = 255 - c.r;
+    c2.g = 255 - c.g;
+    c2.b = 255 - c.b;
+    c2.a = c.a;
+    return c2;
+}
+
 int main(void)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenWidth = 1024;
+    const int screenHeight = 800;
 
     // Set custom logger
     SetTraceLogCallback(CustomLog);
@@ -59,6 +75,10 @@ int main(void)
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
+
+    const Color allColors[] = { MAROON, ORANGE, DARKGREEN, DARKBLUE, DARKPURPLE, DARKBROWN, GRAY, DARKGRAY, BLACK, RAYWHITE, RED, GOLD, LIME, BLUE, VIOLET, BROWN, LIGHTGRAY, WHITE };
+    const char* allColorsStr[] = { "MAROON", "ORANGE", "DARKGREEN", "DARKBLUE", "DARKPURPLE", "DARKBROWN", "GRAY", "DARKGRAY", "BLACK", "RAYWHITE", "RED", "GOLD", "LIME", "BLUE", "VIOLET", "BROWN", "LIGHTGRAY", "WHITE" };
+
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -74,7 +94,12 @@ int main(void)
 
         ClearBackground(RAYWHITE);
 
-        DrawText("Check out the console output to see the custom logger in action!", 60, 200, 20, LIGHTGRAY);
+        static const int blockSize = screenHeight / 18;
+        for (int i = 0; i < 18; i++)
+        {
+            DrawRectangle(0, i*blockSize, screenWidth, blockSize, allColors[i]);
+            DrawText(allColorsStr[i], 10, 4 + i*blockSize, 16, invertColor(allColors[i]));
+        }
 
         EndDrawing();
         //----------------------------------------------------------------------------------
